@@ -1,9 +1,9 @@
 # Benjamin Zeffer's SI364 Midterm Fall 2018
 
-##Description
+## Description
 For the SI364 midterm, doing SOMETHING idk yet honestly, why did I **wait so damn long** to start this???
 
-##Requirements
+## Requirements
 
 Routes
 * http://idkyetlol
