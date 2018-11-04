@@ -1,4 +1,4 @@
-# SI364 Midterm Benjamin Zeffer
+# SI364 Midterm -- Benjamin Zeffer
 
 # Import Statements
 import requests
@@ -88,23 +88,6 @@ def find_movies():
     f = MovieForm()
     return render_template("find_movies.html," form=form)
 
-@app.route("/")
-
-# @app.route("/mresults", methods=["GET","POST"])
-# def mresults():
-#     f = MovieForm(request.form)
-#     if f.validate_on_submit():
-#         t = f.title.data
-#         nmovie = Movie.query.filter_by(title=t).first() #sorting the titles of the list of movies in alphabetical order
-
-#         if movie
-
-
-
-############################
-###### ERROR HANDLING ######
-############################
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html")
@@ -112,6 +95,50 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template("500.html")
+
+@app.route("/leave_a_review")
+def leave_a_review():
+    f = MovieReviewForm()
+    return render_template("leave_a_review.html", form=form)
+
+@app.route("/movie_results", methods=["GET","POST"])
+def mresults():
+    f = MovieForm(request.form)
+    if f.validate_on_submit():
+        title = f.title.data
+        nmovie = Movie.query.filter_by(title=t).first() #sorting the titles of the list of movies in alphabetical order
+
+        if nmovie:
+            n = nmovie.title
+            d = nmovie.director
+            y = nmovie.year_of_release
+            p = nmovie.plot
+            g = nmovie.genre
+            return render_template('movie_results.html', title=n, director=d, year=y, genre=g, plot=p)
+
+        else:
+            m_dict = get_movie_results(title)
+            m_title = movie_dict["Title"]
+            d = m_dict["Director"]
+            y = m_dict["Year"]
+            g = m_dict["Genre"]
+            p = m_dict["Plot"]
+            m_info = Movie(title=m_title, director=d, year_of_release=y, genre=g, plot=p)
+
+            db.session.add(movie_info)
+            db.session.commit()
+
+            return render_template("movie_results.html", title = movie_title, director = director, year = year, genre = genre, plot = plot)
+
+    else:
+        return render_template("500.html") #renders an error template if something goes wrong
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
 	db.create_all()
