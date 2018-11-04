@@ -14,8 +14,8 @@ The name of the database is **benjaminsmidtermd**, URI can be found on line 24 n
 * http://localhost:5000/home           --> home_page.html
 * http://localhost:5000/find_movies    --> find_movie.html
 * http://localhost:5000/movie_results  --> movie_results.html
-* http://localhost:5000/leave_a_review --> leave_a_review.html
 * http://localhost:5000/reviews        --> reviews.html
+* http://localhost:5000/leave_a_review --> leave_a_review.html
 
 **Code Requirements**
 * **Ensure that the SI364midterm.py file has all the setup ( app.config values, import statements, code to run the app if that file is run, etc) necessary to run the Flask application, and the application runs correctly on http://localhost:5000 (and the other routes you set up)**
