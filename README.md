@@ -26,15 +26,15 @@ In order to properly make this function, one must go to http://www.omdbapi.com/a
 * At least one request to a REST API that is based on data submitted in a WTForm.
 * At least one additional (not provided) WTForm that sends data with a GET request to a new page.
 * At least one additional (not provided) WTForm that sends data with a POST request to the same page.
-* At least one custom validator for a field in a WTForm.
-* At least 2 additional model classes.
-* Have a one:many relationship that works properly built between 2 of your models.
+* **At least one custom validator for a field in a WTForm.**
+* **At least 2 additional model classes.**
+* **Have a one:many relationship that works properly built between 2 of your models.**
 * Successfully save data to each table.
 * Successfully query data from each of your models (so query at least one column, or all data, from every database table you have a * model for).
 * Query data using an .all() method in at least one view function and send the results of that query to a template.
-* **Include at least one use of redirect . (HINT: This should probably happen in the view function where data is posted...)
-* **Include at least one use of url_for . (HINT: This could happen where you render a form...)
-* **Have at least 3 view functions that are not included with the code we have provided.
+* **Include at least one use of redirect . (HINT: This should probably happen in the view function where data is posted...)**
+* **Include at least one use of url_for . (HINT: This could happen where you render a form...)**
+* **Have at least 3 view functions that are not included with the code we have provided.**
 
 **Additional Requirements**
 * (100 points) Include an additional model class (to make at least 4 total in the application) with at least 3 columns. Save data to it AND query data from it; use the data you query in a view-function, and as a result of querying that data, something should show up in a view. (The data itself should show up, OR the result of a request made with the data should show up.)
