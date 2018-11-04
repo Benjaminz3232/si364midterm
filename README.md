@@ -13,7 +13,7 @@ In order to properly make this function, one must go to http://www.omdbapi.com/a
 * http://localhost:5000/find_movies   --> find_movie.html
 * http://localhost:5000/movie_results --> movie_results.html
 * http://localhost:5000/leave_review  --> leave_review.html
-* http://localhost:5000/all_reviews   --> all_reviews.html
+* http://localhost:5000/reviews       --> reviews.html
 
 **Code Requirements**
 * Ensure that the SI364midterm.py file has all the setup ( app.config values, import statements, code to run the app if that file is run, etc) necessary to run the Flask application, and the application runs correctly on http://localhost:5000 (and the other routes you set up)
