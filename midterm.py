@@ -136,6 +136,55 @@ def mresults():
 
 
 
+@app.route('/all_reviews', methods=["GET","POST"])
+def view_reviews():
+    f = MovieReviewForm(request.form)
+
+    if f.validate_on_submit():
+        name = f.name.data
+        movie = f.nmovie.data
+        movie_review = f.movie_review.data
+        number_of_stars = f.rating.data
+
+        movie_review = MovieReviews.query.filter_by(name=name, title=nmovie, review=movie_review, stars_given=rating).first()
+
+# class MovieReviewForm(FlaskForm):
+#     name = StringField("Name of person giving the review: ", validators=[Required()])
+#     nmovie = StringField("Name of the movie being reviewed: ", validators=[Required()])
+#     movie_review = StringField("Enter your review of the movie, must be shorter than 300 character!", validators=[Required()])
+#     rating = IntegerField("Give the movie a numerical rating out of five stars (ex.: 4)", validators=[Required()])
+#     submit = SubmitField("Submit")
+
+
+
+    #     if Movie.query.filter_by(title=movie).first():
+    #         print("Movie is already in database")
+    #     else:
+    #         new_movie = get_movie_results(movie)
+    #         movie_title = new_movie["Title"]
+    #         director = new_movie["Director"]
+    #         year = new_movie['Year']
+    #         genre = new_movie['Genre']
+    #         plot = new_movie['Plot']
+    #         movie_info = Movie(title=movie_title, director = director, year_released = year, genre = genre, plot = plot)
+    #         db.session.add(movie_info)
+    #         db.session.commit()
+
+    #     if movie_review:
+    #         print("You have already submitted this review")
+    #         return redirect(url_for("leave_review"))
+    #     else:
+    #         movie_review = MovieReviews(name = name, title = movie, review = movie_review_entry, stars = number_of_stars)
+    #         db.session.add(movie_review)
+    #         db.session.commit()
+
+    # reviews = MovieReviews.query.all()
+    # all_reviews = []
+    # for review in reviews:
+    #     tupple = (review.name, review.title, review.review, review.stars)
+    #     all_reviews.append(tupple)
+    # return render_template('all_reviews.html', all_reviews = all_reviews)
+
 
 
 
