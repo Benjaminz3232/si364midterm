@@ -1,10 +1,9 @@
 {% block content %}
-Base
 {% endblock %}
-<h3>The Classic Main Menu Screen</h3>
+<h3>The Classic Menu Screen</h3>
 <ul>
     <li><a href="{{ url_for('home')}}">Home</a></li>
-    <li><a href="{{ url_for('find_movies')}}">Look for a movie</a></li>
-    <li><a href="{{ url_for('leave_a_review')}}">Review a movie</a></li>
-    <li><a href="{{ url_for('reviews')}}">Current reviews for selected movie</a></li>
+    <li><a href="{{ url_for('find_movies')}}">Search For Movies</a></li>
+    <li><a href="{{ url_for('leave_review')}}">Review a Movie</a></li>
+    <li><a href="{{ url_for('view_reviews')}}">Look At Reviews For a Movie</a></li>
 </ul>
