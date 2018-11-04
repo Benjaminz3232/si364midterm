@@ -6,14 +6,16 @@ A brief description of this application: using the IMDB restAPI, one can utilize
 ### Notes
 In order to properly make this function, one must go to http://www.omdbapi.com/apikey.aspx and enter some information to receive their own API key. One must then replace the current API key with their given API key (via email) in order to make proper requests to the API server.
 
+The name of the database is 
+
 ## Requirements
 
 **Routes**
-* http://localhost:5000/home          --> home_page.html
-* http://localhost:5000/find_movies   --> find_movie.html
-* http://localhost:5000/movie_results --> movie_results.html
-* http://localhost:5000/leave_a_review  --> leave_a_review.html
-* http://localhost:5000/reviews       --> reviews.html
+* http://localhost:5000/home           --> home_page.html
+* http://localhost:5000/find_movies    --> find_movie.html
+* http://localhost:5000/movie_results  --> movie_results.html
+* http://localhost:5000/leave_a_review --> leave_a_review.html
+* http://localhost:5000/reviews        --> reviews.html
 
 **Code Requirements**
 * **Ensure that the SI364midterm.py file has all the setup ( app.config values, import statements, code to run the app if that file is run, etc) necessary to run the Flask application, and the application runs correctly on http://localhost:5000 (and the other routes you set up)**
