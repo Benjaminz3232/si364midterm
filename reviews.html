@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul>
+{% for review in reviews %}
+    <ul>
+      <li><i>Posted by</i> <strong>{{ review[0] }}</strong></li> 
+        <ul>
+          <li>Movie: {{ review[1] }}</li>
+          <li>Review: {{ review[2] }}</li>
+          <li>Stars: {{ review[3] }}</li>
+        </ul>
+    </ul>
+{% endfor %}
+</ul>
+{% if not reviews %}
+    No reviews available.
+{% endif %}
+{% endblock %}
