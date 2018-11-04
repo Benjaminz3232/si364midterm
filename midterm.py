@@ -10,6 +10,10 @@ from wtforms import StringField, SubmitField, ValidationError, IntegerField
 from wtforms.validators import Required, Length
 from flask_sqlalchemy import SQLAlchemy
 
+# Important Stuff, Do Not Skip This!!!
+imdbapikey = "7b2b0341" #THIS NEEDS TO BE CHANGED TO WORK --> this api key needs to be retrived from http://www.omdbapi.com/apikey.aspx
+#imdbapikey = "http://www.omdbapi.com/?apikey=7b2b0341&" --> this is the full api key that I personally retrieved
+
 # Application Set Up
 app = Flask(__name__)
 app.debug = True
@@ -27,9 +31,6 @@ db = SQLAlchemy(app)
 ######################################
 ######## HELPER FXNS (If any) ########
 ######################################
-
-imdbapikey = "7b2b0341" #this api key needs to be retrived from http://www.omdbapi.com/apikey.aspx
-#imdbapikey = "http://www.omdbapi.com/?apikey=7b2b0341&" --> thiis is the full api key that I personally retrieved
 
 def get_movie_results(title):
     url = "http://www.omdbapi.com/?apikey=" + imdbapikey + "&"
@@ -125,10 +126,10 @@ def mresults():
             p = m_dict["Plot"]
             m_info = Movie(title=m_title, director=d, year_of_release=y, genre=g, plot=p)
 
-            db.session.add(movie_info)
+            db.session.add(m_info)
             db.session.commit()
 
-            return render_template("movie_results.html", title = movie_title, director = director, year = year, genre = genre, plot = plot)
+            return render_template("movie_results.html", title=m_title, director=d, year=y, genre=g, plot=p)
 
     else:
         return render_template("500.html") #renders an error template if something goes wrong
