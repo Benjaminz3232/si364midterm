@@ -1,14 +1,19 @@
 # Benjamin Zeffer's SI364 Midterm Fall 2018
 
 ## Description
-For the SI364 midterm, doing SOMETHING idk yet honestly, why did I **wait so damn long** to start this???
+A brief description of this application: using the IMDB restAPI, one can utilize this app to search for movies receiving some basic information about them. Additionally, the user is able to look at reviews of the movie and even submit their own review on the movie with a rating.
+
+### Notes
+In order to properly make this function, one must go to http://www.omdbapi.com/apikey.aspx and enter some information to receive their own API key. One must then replace the current API key with their given API key (via email) in order to make proper requests to the API server.
 
 ## Requirements
 
 **Routes**
-* http://idkyetlol
-* http://justfillingwhitespace
-* http://dontmindme
+* http://localhost:5000/home          --> home_page.html
+* http://localhost:5000/find_movies   --> find_movie.html
+* http://localhost:5000/movie_results --> movie_results.html
+* http://localhost:5000/leave_review  --> leave_review.html
+* http://localhost:5000/all_reviews   --> all_reviews.html
 
 **Code Requirements**
 * Ensure that the SI364midterm.py file has all the setup ( app.config values, import statements, code to run the app if that file is run, etc) necessary to run the Flask application, and the application runs correctly on http://localhost:5000 (and the other routes you set up)
@@ -27,9 +32,9 @@ For the SI364 midterm, doing SOMETHING idk yet honestly, why did I **wait so dam
 * Successfully save data to each table.
 * Successfully query data from each of your models (so query at least one column, or all data, from every database table you have a * model for).
 * Query data using an .all() method in at least one view function and send the results of that query to a template.
-* Include at least one use of redirect . (HINT: This should probably happen in the view function where data is posted...)
-* Include at least one use of url_for . (HINT: This could happen where you render a form...)
-* Have at least 3 view functions that are not included with the code we have provided.
+* **Include at least one use of redirect . (HINT: This should probably happen in the view function where data is posted...)
+* **Include at least one use of url_for . (HINT: This could happen where you render a form...)
+* **Have at least 3 view functions that are not included with the code we have provided.
 
 **Additional Requirements**
 * (100 points) Include an additional model class (to make at least 4 total in the application) with at least 3 columns. Save data to it AND query data from it; use the data you query in a view-function, and as a result of querying that data, something should show up in a view. (The data itself should show up, OR the result of a request made with the data should show up.)
