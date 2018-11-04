@@ -1,5 +1,10 @@
 # SI364 Midterm -- Benjamin Zeffer
 
+# NOTE: I had a lot of trouble getting my code to interact with the 
+# databases properly due to some mixups. However, the code itself
+# should theoreticallly work.
+
+
 # Import Statements
 import requests
 import json
@@ -93,10 +98,6 @@ def find_movies():
 def page_not_found(e):
     return render_template("404.html")
 
-@app.errorhandler(500)
-def page_not_found(e):
-    return render_template("500.html")
-
 @app.route("/leave_a_review")
 def leave_a_review():
     f = MovieReviewForm()
@@ -132,7 +133,7 @@ def mresults():
             return render_template("movie_results.html", title=m_title, director=d, year=y, genre=g, plot=p)
 
     else:
-        return render_template("500.html") #renders an error template if something goes wrong
+        return render_template("404.html") #renders an error template if something goes wrong
 
 
 
@@ -193,7 +194,7 @@ def view_reviews():
             db.session.commit()
 
     else:
-        return render_template("500.html")
+        return render_template("404.html")
 
 
     all_reviews = MovieReviews.query.all()
