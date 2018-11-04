@@ -6,7 +6,7 @@ A brief description of this application: using the IMDB restAPI, one can utilize
 ### Notes
 In order to properly make this function, one *must* go to **http://www.omdbapi.com/apikey.aspx** and enter some information to receive their own API key. After you've received your own API key, *replace the current API key with yours* (send to you via email) in order to make proper requests to the API server.
 
-The name of the database is **benjaminsmidtermd**, URI can be found on line 24 next to the rest of the app.config values.
+The name of the database is **benjaminsmidterm**, URI can be found on line 24 next to the rest of the app.config values.
 
 ## Requirements
 
