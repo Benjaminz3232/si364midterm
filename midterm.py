@@ -38,19 +38,19 @@ def get_movie_results(title):
     reponse = r.json()
     return(response)
 
-##################
-##### MOdels #####
-##################
+############################
+##### MODELS ###############
+############################
 
 class Movie(db.Model):
     __tablename__ = "movies" #name of the table
-    id = db.Column(db.Integer, primary_key = True) #primary_key needs to be defined here, but doesn't actually matter
-    title = db.Column(db.String, unique = True)    #unique needs to be defined too, it's just a parameter that needs to be defined like the primary key for id
+    id = db.Column(db.Integer, primary_key=True) #primary_key needs to be defined here, but doesn't actually matter
+    title = db.Column(db.String, unique=True)    #unique needs to be defined too, it's just a parameter that needs to be defined like the primary key for id
     year_of_release = db.Column(db.String)
     genre = db.Column(db.String)
     plot = db.Column(db.String)
     director = db.Column(db.String)    
-    reviews = db.relationship("MovieReviews", backref = "Movie")
+    reviews = db.relationship("MovieReviews", backref="Movie")
 
 class MovieReviews(db.Model):
     __tablename__ = 'reviews' #name of the table
@@ -60,39 +60,58 @@ class MovieReviews(db.Model):
     title = db.Column(db.String, db.ForeignKey("movies.title")) #referencing the titles from the other table, the "movies" table
     stars_given = db.Column(db.Integer)
 
-###################
-###### FORMS ######
-###################
+############################
+###### FORMS ###############
+############################
 
 class MovieForm(FlaskForm):
     title = StringField("Type the name of a movie to get info on that movie!", validators=[Required()])
     submit = SubmitField()
 
 class MovieReviewForm(FlaskForm):
-    n = StringField("Name of person giving the review: ", validators=[Required()])
+    name = StringField("Name of person giving the review: ", validators=[Required()])
     nmovie = StringField("Name of the movie being reviewed: ", validators=[Required()])
     movie_review = StringField("Enter your review of the movie, must be shorter than 300 character!", validators=[Required()])
     rating = IntegerField("Give the movie a numerical rating out of five stars (ex.: 4)", validators=[Required()])
     submit = SubmitField("Submit")
 
-#######################
-###### VIEW FXNS ######
-#######################
+#############################
+###### VIEW FXNS ############
+#############################
 
-@app.route("/")
+@app.route("/home")
 def home_page():
     return render_template("home_page.html")
 
-@app.route("")
+@app.route("/find_movies")
+def find_movies():
+    f = MovieForm()
+    return render_template("find_movies.html," form=form)
 
+@app.route("/")
+
+# @app.route("/mresults", methods=["GET","POST"])
+# def mresults():
+#     f = MovieForm(request.form)
+#     if f.validate_on_submit():
+#         t = f.title.data
+#         nmovie = Movie.query.filter_by(title=t).first() #sorting the titles of the list of movies in alphabetical order
+
+#         if movie
+
+
+
+############################
+###### ERROR HANDLING ######
+############################
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html')
+    return render_template("404.html")
 
 @app.errorhandler(500)
 def page_not_found(e):
-    return render_template('500.html')
+    return render_template("500.html")
 
 if __name__ == "__main__":
 	db.create_all()
