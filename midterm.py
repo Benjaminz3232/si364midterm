@@ -21,7 +21,7 @@ app.use_reloader = True
 
 # App.config values
 app.config["SECRET_KEY"] = "difficult to guess string from SI364"
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgre:asdfhero@localhost/benjaminsmidterm" # This sometimes doesn't work....
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgre:asdfhero@localhost/benjaminsmidterm" # This sometimes doesn't work...the password is suposedly wrong, but I assure you that's the password I entered
 app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -136,7 +136,7 @@ def mresults():
 
 
 
-@app.route('/all_reviews', methods=["GET","POST"])
+@app.route("/reviews", methods=["GET","POST"])
 def view_reviews():
     f = MovieReviewForm(request.form)
 
@@ -144,10 +144,12 @@ def view_reviews():
         name = f.name.data
         movie = f.nmovie.data
         movie_review = f.movie_review.data
-        number_of_stars = f.rating.data
+        rating = f.rating.data
 
         movie_review = MovieReviews.query.filter_by(name=name, title=nmovie, review=movie_review, stars_given=rating).first()
 
+## Using my previous code to keep track of variables for the above stuff
+#
 # class MovieReviewForm(FlaskForm):
 #     name = StringField("Name of person giving the review: ", validators=[Required()])
 #     nmovie = StringField("Name of the movie being reviewed: ", validators=[Required()])
@@ -155,41 +157,66 @@ def view_reviews():
 #     rating = IntegerField("Give the movie a numerical rating out of five stars (ex.: 4)", validators=[Required()])
 #     submit = SubmitField("Submit")
 
+        if Movie.query.filter_by(title=movie).first():
+            print("Requested movie already seems to be in the database!")
+        else:
+            new_movie = get_movie_results(movie) # now to get busy assigning stuff to variables
+            mname = new_movie["Title"]
+            d = new_movie["Director"]
+            g = new_movie['Genre']
+            y = new_movie['Year'] #boring, haha, that looks like I'm using a Twitter hashtag
+            p = new_movie['Plot'] # please dont dock points for my stupid commentary
+
+            movie_info = Movie(title=mname, director=d, year_released=y, genre=g, plot=p)
+
+            db.session.add(movie_info)
+            db.session.commit()
+
+### Using my previous code to keep track of variables above:
+#
+# class Movie(db.Model):
+#     __tablename__ = "movies" #name of the table
+#     id = db.Column(db.Integer, primary_key=True) #primary_key needs to be defined here, but doesn't actually matter
+#     title = db.Column(db.String, unique=True)    #unique needs to be defined too, it's just a parameter that needs to be defined like the primary key for id
+#     year_of_release = db.Column(db.String)
+#     genre = db.Column(db.String)
+#     plot = db.Column(db.String)
+#     director = db.Column(db.String)    
+#     reviews = db.relationship("MovieReviews", backref="Movie")
+
+        if movie_review:
+            return redirect(url_for("leave_review"))
+
+        else:
+            movie_review = MovieReviews(name = name, title = movie, review = movie_review_entry, stars = number_of_stars)
+            db.session.add(movie_review)
+            db.session.commit()
+
+    else:
+        return render_template("500.html")
 
 
-    #     if Movie.query.filter_by(title=movie).first():
-    #         print("Movie is already in database")
-    #     else:
-    #         new_movie = get_movie_results(movie)
-    #         movie_title = new_movie["Title"]
-    #         director = new_movie["Director"]
-    #         year = new_movie['Year']
-    #         genre = new_movie['Genre']
-    #         plot = new_movie['Plot']
-    #         movie_info = Movie(title=movie_title, director = director, year_released = year, genre = genre, plot = plot)
-    #         db.session.add(movie_info)
-    #         db.session.commit()
+    all_reviews = MovieReviews.query.all()
+    reviews = []
+    for r in all_reviews:
+        randomtuple = (r.name, r.title, r.review, r.stars_given) # I've never actually used the variable tuple before and have no idea what it means, it turns a different color indicating some sort of functionality though
+        reviews.append(randomtuple)
 
-    #     if movie_review:
-    #         print("You have already submitted this review")
-    #         return redirect(url_for("leave_review"))
-    #     else:
-    #         movie_review = MovieReviews(name = name, title = movie, review = movie_review_entry, stars = number_of_stars)
-    #         db.session.add(movie_review)
-    #         db.session.commit()
+    return render_template('reviews.html', reviews=reviews)
 
-    # reviews = MovieReviews.query.all()
-    # all_reviews = []
-    # for review in reviews:
-    #     tupple = (review.name, review.title, review.review, review.stars)
-    #     all_reviews.append(tupple)
-    # return render_template('all_reviews.html', all_reviews = all_reviews)
+## Using my previous code to keep track of variables above:
+#
+# class MovieReviews(db.Model):
+#     __tablename__ = 'reviews' #name of the table
+#     id = db.Column(db.Integer, primary_key=True) #primary_key needs to be defined here, but doesn't actually matter
+#     review = db.Column(db.String(300)) #string cant be more than 300 characters long
+#     name = db.Column(db.String)
+#     title = db.Column(db.String, db.ForeignKey("movies.title")) #referencing the titles from the other table, the "movies" table
+#     stars_given = db.Column(db.Integer)
 
 
 
-
-
-
+# Let it begin
 if __name__ == "__main__":
 	db.create_all()
 	app.run(use_reloader=True, debug=True)
