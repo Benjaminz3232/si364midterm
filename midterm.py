@@ -26,7 +26,7 @@ app.use_reloader = True
 
 # App.config values
 app.config["SECRET_KEY"] = "difficult to guess string from SI364"
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgre:asdfhero@localhost/benjaminsmidterm" # This sometimes doesn't work...the password is suposedly wrong, but I assure you that's the password I entered
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:asdfhero@localhost/benjaminsmidterm" # This sometimes doesn't work...the password is suposedly wrong, but I assure you that's the password I entered
 app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
