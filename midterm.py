@@ -41,7 +41,7 @@ def get_movie_results(title):
     url = "http://www.omdbapi.com/?apikey=" + imdbapikey + "&"
     params_dict = {'t':title}
     r = requests.get(url, params=params_dict)
-    reponse = r.json()
+    response = r.json()
     return(response)
 
 ############################
@@ -92,7 +92,7 @@ def home_page():
 @app.route("/find_movies")
 def find_movies():
     f = MovieForm()
-    return render_template("find_movies.html", form=form)
+    return render_template("find_movies.html", form=f)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -101,14 +101,14 @@ def page_not_found(e):
 @app.route("/leave_a_review")
 def leave_a_review():
     f = MovieReviewForm()
-    return render_template("leave_a_review.html", form=form)
+    return render_template("leave_a_review.html", form=f)
 
 @app.route("/movie_results", methods=["GET","POST"])
 def mresults():
     f = MovieForm(request.form)
     if f.validate_on_submit():
         title = f.title.data
-        nmovie = Movie.query.filter_by(title=t).first() #sorting the titles of the list of movies in alphabetical order
+        nmovie = Movie.query.filter_by(title=title).first() #sorting the titles of the list of movies in alphabetical order
 
         if nmovie:
             n = nmovie.title
