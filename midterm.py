@@ -92,7 +92,7 @@ def home_page():
 @app.route("/find_movies")
 def find_movies():
     f = MovieForm()
-    return render_template("find_movies.html," form=form)
+    return render_template("find_movies.html", form=form)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -116,7 +116,7 @@ def mresults():
             y = nmovie.year_of_release
             p = nmovie.plot
             g = nmovie.genre
-            return render_template('movie_results.html', title=n, director=d, year=y, genre=g, plot=p)
+            return render_template("movie_results.html", title=n, director=d, year=y, genre=g, plot=p)
 
         else:
             m_dict = get_movie_results(title)
